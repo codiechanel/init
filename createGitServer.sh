@@ -10,3 +10,5 @@ git init --bare
 
 # on remote client computer
 git remote add origin git@gitserver:/home/git/project.git
+or
+git remote add origin git@gitserver:project.git

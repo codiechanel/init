@@ -12,3 +12,6 @@ git init --bare
 git remote add origin git@gitserver:/home/git/project.git
 or
 git remote add origin git@gitserver:project.git
+
+# checkout; add this to post hook
+GIT_WORK_TREE=/home/git/project.git/mywebsite git checkout -f

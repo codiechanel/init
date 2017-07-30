@@ -10,7 +10,8 @@ const HOST = '0.0.0.0';
 const app = express();
 app.get('/', (req, res) => {
   let str = process.env.NODE_ENV
-  res.send(str + 'Hello coolness fast great world\n');
+  let cool = process.env.COOLNESS
+  res.send(str + cool + 'Hello coolness fast great world\n');
 });
 
 app.listen(PORT, HOST);

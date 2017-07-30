@@ -66,3 +66,32 @@ docker run -d  -p :80 -e "SERVICE_80_NAME=second" -e "SERVICE_80_ID=second" -e "
 ```
 
 # The SERVICE_80_NAME is what matters here. You can have the same service name if you wana load balance, but service id should be unique.
+
+# Checking
+
+```
+ping -c1 http.service.consul
+```
+
+```
+dig @172.17.0.1 http.service.consul  
+or
+ dig @172.17.0.1 http.service.consul SRV
+ # to get the expose port
+```
+
+# Query dns
+
+```
+curl -s http://localhost:8500/v1/catalog/service/http | jq .
+```
+
+# Deregister
+
+```
+curl -X PUT  http://localhost:8500/v1/agent/service/deregister/http1
+```
+
+# Warning
+
+dont use the name consul when deploying, it's a reserved word

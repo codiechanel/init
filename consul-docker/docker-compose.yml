@@ -1,0 +1,12 @@
+version: '2'
+services:
+  web4:
+    image: nginx
+    environment:
+    - SERVICE_80_NAME=great5
+    - SERVICE_80_ID=great5
+    expose:
+      - "80"
+    ports:
+      - "80"
+

@@ -2,6 +2,7 @@
 
 ```
 docker stop $(docker ps -a -q)
+docker start  $(docker ps -a -q)
 docker rm $(docker ps -a -q)
 ```
 
@@ -42,3 +43,7 @@ docker run -it --rm --name my-running-script  -v "local:/usr/src/app" -w /usr/sr
 ```
 docker run --rm -v /var/run/docker.sock:/var/run/docker.sock nate/dockviz images -t
 ```
+
+# tricks
+
+docker run --help | grep dns

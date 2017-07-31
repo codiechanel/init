@@ -21,3 +21,9 @@ nmcli device connect enp0s8
 
  iptables -L
  iptables -L -nv
+# service
+ service --status-all
+
+
+ # dns mas
+ systemctl enable dnsmasq

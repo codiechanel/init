@@ -1,12 +1,47 @@
-# Binary (woring on ubuntu)
+# you can ctually run openshift origin on  a t2 micro 
+# you just need to create a swap file
+memory usage is 650mb.... and as you deploy new apps
+it stays at 650 mb and its only using the swap file...
 
-https://github.com/openshift/origin/releases/download/v3.6.0/openshift-origin-server-v3.6.0-c4dd4cf-linux-64bit.tar.gz
+actually fast 
+openshift alone consumes 400mb
+
+can run node js plus mongo (50mb allocation
+python postres
+cnt run cake mysql -- maybe it requres more pods
+cnt run rubyrails postgres - maybe it needs a lot of memory 
+
+maybe pods are checking real memory ..not swap
+
+
+# Binary (woring on ubuntu)
+curl -o origin.tar.gz -L https://github.com/openshift/origin/releases/download/v3.6.0/openshift-origin-server-v3.6.0-c4dd4cf-linux-64bit.tar.gz
+
+tar -xvf origin.tar.gz
+
+oc cluster up  --public-hostname=34.229.144.110
+ --public-hostname=192.168.1.7
+192.168.1.10
+107.23.115.6
+
+sudo yum install -y nano
 
 /etc/docker/daemon.json
 should have this file
 {
-  "insecure-registries" : ["myregistrydomain.com:5000"]
+  "insecure-registries" : ["172.30.0.0/16"]
 }
+
+
+##### NOTES you may have skipped this
+
+ yum install wget git net-tools bind-utils iptables-services bridge-utils bash-completion kexec-tools sos psacct
+
+ yum update
+
+ Edit the /etc/sysconfig/docker file and add --insecure-registry 172.30.0.0/16 to the OPTIONS parameter. For example:
+
+OPTIONS='--selinux-enabled --insecure-registry 172.30.0.0/16'
 
 # init
 
@@ -79,34 +114,11 @@ kubectl proxy --address=0.0.0.0 --port=8080
 oc login -u system:admin
 
 
-##### NOTES you may have skipped this
-
- yum install wget git net-tools bind-utils iptables-services bridge-utils bash-completion kexec-tools sos psacct
-
- yum update
-
- Edit the /etc/sysconfig/docker file and add --insecure-registry 172.30.0.0/16 to the OPTIONS parameter. For example:
-
-OPTIONS='--selinux-enabled --insecure-registry 172.30.0.0/16'
-
-
 
 
 # registry 
 
 oadm registry --config=admin.kubeconfig --service-account=registry
-
-# firewall
-
-firewall-cmd --zone=public --add-port=8443/tcp --permanent
-firewall-cmd --zone=public --add-port=443/tcp --permanent
-firewall-cmd --reload
-or
-firewall-cmd --zone=trusted --change-interface=docker0
-
-or stop it
-sudo systemctl stop firewalld
-sudo systemctl start firewalld
 
 
 
@@ -123,11 +135,7 @@ oc describe svc/kubernetes
 
  oc adm router <router_name> --replicas=<number> --service-account=router
 
- # login
- oc login
- oc new-project test
- oc new-app openshift/deployment-example
- oc status
+
 
 
  # templates
@@ -145,20 +153,6 @@ IMAGESTREAMDIR=~/openshift-ansible/roles/openshift_examples/files/examples/v1.1/
 
 ip a
 ip route
-
-# app mgt
-
-oc status -v
-oc logs -f bc/ruby-ex
-oc project <name>
-# use a label so you can delete them all at once
- oc delete all -l name=<name>
-
-
-oc new-app openshift/deployment-example -l name=<name>
-oc new-app openshift/nodejs-010-centos7~https://github.com/openshift/nodejs-ex.git -l name=<name>
-oc new-app centos/ruby-22-centos7~https://github.com/openshift/ruby-ex.git
-oc new-app centos/ruby-22-centos7~https://github.com/codiechanel/ruby-ex.git
 
 
 # Verify NetworkManager is configured to use dnsmasq:
@@ -235,3 +229,5 @@ oc get endpoints kubernetes -n default -o yaml
  --insecure-registry 172.30.0.0/16
 
  --public-hostname=192.168.1.7
+
+ OpenShift Origin uses iptables as the default firewall, but you can configure your cluster to use firewalld during the install process.

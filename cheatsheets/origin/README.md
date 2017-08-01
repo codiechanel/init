@@ -1,3 +1,13 @@
+# Binary (woring on ubuntu)
+
+https://github.com/openshift/origin/releases/download/v3.6.0/openshift-origin-server-v3.6.0-c4dd4cf-linux-64bit.tar.gz
+
+/etc/docker/daemon.json
+should have this file
+{
+  "insecure-registries" : ["myregistrydomain.com:5000"]
+}
+
 # init
 
 sudo docker run -d --name "origin" \
@@ -213,3 +223,15 @@ oc get service kubernetes -n default -o yaml
 oc get endpoints kubernetes -n default -o yaml
 
  oc cluster up --public-hostname 192.168.1.9
+
+# Enabling and Disabling SELinux
+# not in ubuntu
+ /usr/sbin/getenforce
+ /usr/sbin/sestatus
+
+ grep -e 'vmx' /proc/cpuinfo
+
+ /etc/sysconfig/docker
+ --insecure-registry 172.30.0.0/16
+
+ --public-hostname=192.168.1.7

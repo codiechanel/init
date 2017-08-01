@@ -47,3 +47,13 @@ docker run --rm -v /var/run/docker.sock:/var/run/docker.sock nate/dockviz images
 # tricks
 
 docker run --help | grep dns
+
+chkconfig --list NetworkManager
+
+service network start
+
+/etc/docker/daemon.json
+should have this file
+{
+  "insecure-registries" : ["myregistrydomain.com:5000"]
+}

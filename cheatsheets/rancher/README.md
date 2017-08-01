@@ -26,3 +26,7 @@ docker-machine start rancherOS
 ```
 sudo docker run -d --restart=unless-stopped -p 8080:8080 rancher/server:stable
 ```
+
+
+# setting password in virtual box
+sudo passwd rancher

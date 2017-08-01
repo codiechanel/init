@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+  registry:
+    restart: always
+    image: registry:2.6.1
+    expose:
+      - '5000'
+    ports:
+      - '5000:5000'
+    volumes:
+      - data:/var/lib/registry
+volumes:
+  data:

@@ -1,5 +1,6 @@
 
 # heck if existing swap 
+# tested on cent os / rancher  
 
 swapon -s
 free -m
@@ -8,8 +9,13 @@ free -m
 
 df -h
 
-# create it 
+# create it .. this is preferred
+sudo dd if=/dev/zero of=/swapfile bs=1024 count=2048
+should give 2G
+
+# over this
 sudo dd if=/dev/zero of=/swapfile count=2048 bs=1MiB
+
 # this one dont work
 # sudo fallocate -l 4G /swapfile
 

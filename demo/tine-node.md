@@ -1,0 +1,1 @@
+docker run -it --rm --name my-running-script  --net=host  -v "$PWD":/usr/src/app -w /usr/src/app codie/tiny-node hello.js

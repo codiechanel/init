@@ -16,6 +16,7 @@ sudo systemctl status network
 # use nmcli 
 
 nmcli device connect enp0s8
+nmcli device connect enp0s3
 
 # firewall rules
 

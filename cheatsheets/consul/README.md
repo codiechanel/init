@@ -1,3 +1,5 @@
+/etc/default/docker
+DOCKER_OPTS="--dns 172.17.0.1 --dns 8.8.8.8 --dns-search service.consul"
 # running consule
 
 edit /etc/dhcp/dhclient.conf
@@ -56,7 +58,7 @@ listen 80 default_server;
 # Deploy normally but add ENV variables like:
 
 ```
-docker run -d  -p :80 -e "SERVICE_80_NAME=fourth" -e "SERVICE_80_ID=fourth"  --name=fourth bitnami/apache
+docker run -d  -p :80 -e SERVICE_TAGS=urlprefix-/foo -e "SERVICE_80_NAME=fourth" -e "SERVICE_80_ID=fourth"  --name=fourth bitnami/apache
 ```
 
 or with health checks

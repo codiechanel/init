@@ -15,3 +15,9 @@ sudo systemctl enable docker
 sudo usermod -aG docker ${USER}
 
 sudo systemctl status docker
+
+*** docker compose
+
+sudo yum install epel-release
+sudo yum install -y python-pip
+sudo pip install docker-compose

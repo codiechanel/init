@@ -1,0 +1,9 @@
+---
+- hosts: aws
+  remote_user: ubuntu
+  become: true
+  tasks:     
+    - script: ./installme.sh
+    - name: verify 
+      shell: cat /etc/apt/sources.list.d/kubernetes.list   
+      

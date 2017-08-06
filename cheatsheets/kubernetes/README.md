@@ -1,6 +1,15 @@
 # Ubuntu version
 
+# adding a node takes a while
+
+# sometimes control plane takes long...
+# restarting kubelet somehow makes it work...
+
+#kuberntes plane is random, sometimes works sometimes not
+
 kubectl get pods --all-namespaces
+
+
 
 use daemon set in trafik
 kubectl apply -f https://raw.githubusercontent.com/containous/traefik/master/examples/k8s/traefik-ds.yaml
@@ -36,3 +45,6 @@ kubectl port-forward $(kubectl get pods | grep traefik | awk -F' ' '{print $1}DD
 scp root@<master ip>:/etc/kubernetes/admin.conf .
 
 kubectl --kubeconfig ./admin.conf get nodes
+
+# kubelet  logs
+journalctl -u kubelet
